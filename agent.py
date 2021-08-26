@@ -159,5 +159,17 @@ class Agent:
             self.num_hold += 1
         
         self.portfolio_value = self.balance + curr_price * self.num_stocks 
-        self.profitloss = ((self.portfolio_value - self.initial_blaance) / self.initial_balance)
+        self.profitloss = ((self.portfolio_value - self.initial_balance) / self.initial_balance)
+
+        self.immediate_reward = self.profitloss 
+
+        delayed_reward = 0
+        self.base_profitloss = ((self.portfolio_value - self.base_portfolio_value) / self.base_portfolio_value)
+        if self.base_profitloss > self.delayed_reward_threshold or self.base_profitloss < -self.delayed_reward_threshold:
+            self.base_portfolio_value = self.portfolio_value
+            delayed_reward = self.immediate_reward 
+        else:
+            delayed_reward = 0
+        
+        return self.immediate_reward, delayed_reward
         
