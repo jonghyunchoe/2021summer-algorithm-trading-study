@@ -31,7 +31,7 @@ if __name__ == '__main__':
     parser.add_argument('--end_date', default='20201231')
     args = parser.parse_args()
 
-    # Keras Backend 설정 
+    # Keras Backend 설정
     if args.backend == 'tensorflow':
         os.environ['KERAS_BACKEND'] = 'tensorflow'
     elif args.backend == 'plaidml':
